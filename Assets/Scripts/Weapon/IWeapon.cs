@@ -1,5 +1,7 @@
 
 
+using UnityEngine;
+
 public interface IWeapon
 {
     void Shot();
@@ -9,4 +11,5 @@ public interface IWeapon
     void Take();
 
     void Remove();
+    void Initialize();
 }

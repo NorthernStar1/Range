@@ -28,11 +28,16 @@ public class PlayerController : MonoBehaviour, IStateSwitcher
     public IBaseState CurrentState { get; set; }
     public List<IBaseState> States { get; set; }
 
+    public Camera Camera => _playerCamera;
+
+    public static PlayerController Singleton;
+
 
 
 
     private void Awake()
     {
+        Singleton = this;
         StartCoroutine(InitPlayer());
     }
     private void Update()

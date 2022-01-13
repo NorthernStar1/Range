@@ -18,25 +18,38 @@ public class Pistol : MonoBehaviour, IWeapon
     public AudioClip ReloadAudio;
     public ParticleSystem ShootEffect;
 
-    private void Start()
+    public bool IsActive;
+    public GameObject Mesh;
+
+
+
+    public void Initialize()
     {
         _ammoInMagazine = _magazineSize;
-    }
+        Remove();
+        PlayerCamera = PlayerController.Singleton.Camera;
 
+    }
     public void Shot()
     {
+        if (IsActive == false)
+            return;
+
         AudioSource.PlayOneShot(ShootAudio);
         ShootEffect.Play();
         _ammoInMagazine--;
         if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out _hit, _range))
-            {
-                if (_hit.rigidbody != null)
-                    _hit.rigidbody.AddForce(-_hit.normal * _damage);
-            }
+        {
+            if (_hit.rigidbody != null)
+                _hit.rigidbody.AddForce(-_hit.normal * _damage);
+        }
     }
 
     public void Reload()
     {
+        if (IsActive == false)
+            return;
+
         AudioSource.PlayOneShot(ReloadAudio);
         var ammoDiference = _magazineSize - _ammoInMagazine;
         if (ammoDiference > _ammoInInventory)
@@ -47,6 +60,9 @@ public class Pistol : MonoBehaviour, IWeapon
 
     public void Update()
     {
+        if (IsActive == false)
+            return;
+
         if(Input.GetMouseButtonDown(0) && _ammoInMagazine > 0)
         {
             Shot();
@@ -59,11 +75,16 @@ public class Pistol : MonoBehaviour, IWeapon
 
     public void Take()
     {
-        throw new System.NotImplementedException();
+        IsActive = true;
+        Mesh.SetActive(true);
+
     }
 
     public void Remove()
     {
-        throw new System.NotImplementedException();
+        IsActive = false;
+        Mesh.SetActive(false);
     }
+
+    
 }
