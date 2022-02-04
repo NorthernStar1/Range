@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UIManager;
 using UnityEngine;
@@ -10,15 +9,12 @@ public class GameUI : MonoBehaviour
     public Transform WindowsRoot;
     public List<UIWindowContainer> WindowsContainers;
     private bool IsBusy;
-    public UIWindowType StartWindow;
-    public List<UIWindowType> StartLoadWindows;
+    
     public static GameUI Singleton;
     private void Awake()
     {
         Singleton = this;
         DontDestroyOnLoad(this);
-        StartLoadWindows.ForEach(x => Load(x));
-        Show(StartWindow);
     }
     
     public void Load(UIWindowType type)
@@ -32,27 +28,26 @@ public class GameUI : MonoBehaviour
     public void Unload(UIWindowType type)
     {
         var container = GetContainerWithType(type);
-        Destroy(container.WindowInstance.Root);
+        if(container.WindowInstance != null)
+            Destroy(container.WindowInstance.Root);
     }
-    public async void Show(UIWindowType type)
+    public async Task Show(UIWindowType type)
     {
-        if (IsBusy)
-            return;
+        if (IsBusy) return;
         IsBusy = true;
         var window = GetContainerWithType(type).WindowInstance;
         await window.Show();
         IsBusy = false;
-    }public async void ShowOnly(UIWindowType type)
+    }public async Task ShowOnly(UIWindowType type)
     {
-        if (IsBusy)
-            return;
+        if (IsBusy) return;
         IsBusy = true;
         await HideAllWindows();
         var window = GetContainerWithType(type).WindowInstance;
         await window.Show();
         IsBusy = false;
     }
-    public async void Hide(UIWindowType type)
+    public async Task Hide(UIWindowType type)
     {
         if (IsBusy)
             return;

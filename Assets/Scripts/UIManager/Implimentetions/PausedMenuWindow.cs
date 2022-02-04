@@ -1,3 +1,4 @@
+using Game;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UIManager;
@@ -7,7 +8,7 @@ public class PausedMenuWindow : BaseUIWindow
     public static bool IsPaused = false;
     public void OpenPauseMenu()
     {
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         IsPaused = true;
         GameUI.Singleton.ShowOnly(UIWindowType.PausedMenu);
     }
@@ -20,7 +21,7 @@ public class PausedMenuWindow : BaseUIWindow
     {
         IsPaused = false;
         GameUI.Singleton.Hide(UIWindowType.PausedMenu);
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
     }
     public void OpenSettings()
     {
@@ -29,8 +30,15 @@ public class PausedMenuWindow : BaseUIWindow
 
     public void OpenMainMenu()
     {
-        IsPaused = false;
-        SceneManager.LoadScene(0);
+        OpenMenuAsync();
     }
-    
+
+    private async void OpenMenuAsync()
+    {
+        IsPaused = false;
+        
+        //await GameUI.Singleton.Show(UIWindowType.LoadingScreen);
+        await GameUI.Singleton.Hide(UIWindowType.PausedMenu);
+        GameManager.Singleton.LoadMenu();
+    }
 }

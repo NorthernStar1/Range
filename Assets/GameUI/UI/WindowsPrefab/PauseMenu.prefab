@@ -687,6 +687,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3d1a9d78297394d89f3a78854df8ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _EaseHide: 1
+  _DurationPositionHide: 1
+  _DurationAlphaHide: 1
+  _PosHide: {x: 0, y: 0, z: 0}
+  _EaseShow: 1
+  _DurationPositionShow: 1
+  _DurationAlphaShow: 1
+  _PosShow: {x: 0, y: 0, z: 0}
 --- !u!1 &1617178445750097794
 GameObject:
   m_ObjectHideFlags: 0
