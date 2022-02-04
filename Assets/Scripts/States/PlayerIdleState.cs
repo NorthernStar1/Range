@@ -12,6 +12,7 @@ public class PlayerIdleState : IBaseState
     public void Enter(IBaseState fromState)
     {
         player.CurrentSpeed = 5f;
+        CrosshairDynamic.Singleton.CrosshairSetup(_crosshairSize); 
     }
 
     public void Exit(IBaseState toState)
@@ -21,7 +22,7 @@ public class PlayerIdleState : IBaseState
 
     public void Update()
     {
-        player.Crosshair.CrosshairSetup(_crosshairSize);
+        
         player.Rotate();
         StateChange();
         StaminaChange();

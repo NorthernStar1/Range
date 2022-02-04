@@ -13,6 +13,7 @@ public class PlayerWalkState : IBaseState
     }
     public void Enter(IBaseState fromState)
     {
+        CrosshairDynamic.Singleton.CrosshairSetup(_crosshairSize);
         player.CurrentSpeed = _walkSpeed;
     }
 
@@ -23,7 +24,6 @@ public class PlayerWalkState : IBaseState
 
     public void Update()
     {
-        player.Crosshair.CrosshairSetup(_crosshairSize);
         player.Rotate();
         StateChange();
         StaminaChange();

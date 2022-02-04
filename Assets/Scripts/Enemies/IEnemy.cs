@@ -2,9 +2,9 @@
 
 public interface IEnemy
 {
-    public abstract void Attack();
-    public abstract void Move();
-    public abstract void TakeDamage();
+    void Attack();
+    void Move();
+    void TakeDamage(float amount);
 
-    public abstract void SetTarget(PlayerController player);
+    void SetTarget(PlayerController player);
 }

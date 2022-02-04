@@ -6,10 +6,5 @@ using UnityEngine;
 public class WeaponsContainerSO : ScriptableObject
 {
     [Tooltip("Objects in this list are must contain component which implements interface IWeapon")]
-
-    /// <summary>
-    /// FOR GEGE WEPE
-    /// </summary>
-
     public List<GameObject> WeaponPrefabs;
 }

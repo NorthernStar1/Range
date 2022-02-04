@@ -5,14 +5,14 @@ public class PlayerJumpingState : IBaseState
 {
     private readonly PlayerController player;
     private float _crosshairSize = 130f;
-    private Vector3 _jumpPower = Vector3.up * 3f;
+    private Vector3 _jumpPower = Vector3.up * 2f;
     public PlayerJumpingState(PlayerController player)
     {
         this.player = player;
     }
     public void Enter(IBaseState fromState)
     {
-     
+        CrosshairDynamic.Singleton.CrosshairSetup(_crosshairSize);
     }
 
     public void Exit(IBaseState toState)
@@ -22,7 +22,7 @@ public class PlayerJumpingState : IBaseState
 
     public void Update()
     {
-        player.Crosshair.CrosshairSetup(_crosshairSize);
+        
         Jump();
         player.Rotate();
         StateChange();

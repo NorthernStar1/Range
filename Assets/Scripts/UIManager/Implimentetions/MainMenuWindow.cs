@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UIManager;
 using UnityEngine;
 
@@ -17,5 +15,9 @@ public class MainMenuWindow : BaseUIWindow
     public void CloseGame()
     {
         Application.Quit();
+    }
+    public void OpenSettings()
+    {
+        Debug.Log("Settings");
     }
 }

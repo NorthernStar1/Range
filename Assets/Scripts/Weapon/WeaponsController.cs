@@ -17,10 +17,6 @@ namespace Weapon
         {
             Initialize();
         }
-
-        /// <summary>
-        /// FOR GEGE WEPE
-        /// </summary>
       
         public void Initialize()
         {

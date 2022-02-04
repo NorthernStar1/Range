@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IStateSwitcher
 {
+    public bool IsDebugingStates;
     [Header("Movement")]
     [SerializeField] private float _gravity = 9f;
     public Vector3 MoveDirection { get; set; }
@@ -21,7 +22,8 @@ public class PlayerController : MonoBehaviour, IStateSwitcher
     [SerializeField] private float _sensivity = 30f;
     private Vector2 _rotationVelocity;
     private float _cameraUpLimit = 90f;
-    private float _cameraDownLimit = -90f;
+    private float _cameraDownLimit = -45f;
+
 
     public Vector3 JumpVelocity { get; set; }
     public CrosshairDynamic Crosshair;
@@ -80,7 +82,8 @@ public class PlayerController : MonoBehaviour, IStateSwitcher
         }
 
         var fromStateName = CurrentState == null ? "null" : CurrentState.GetType().Name;
-        Debug.Log($"Switch state <color=yellow>{fromStateName}</color> -> <color=yellow>{nextState.GetType().Name}</color>.");
+        if(IsDebugingStates)
+            Debug.Log($"Switch state <color=yellow>{fromStateName}</color> -> <color=yellow>{nextState.GetType().Name}</color>.");
 
         CurrentState?.Exit(nextState);
         nextState.Enter(CurrentState);

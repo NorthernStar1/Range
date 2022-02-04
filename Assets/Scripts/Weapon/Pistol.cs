@@ -1,17 +1,15 @@
-
-
 using UnityEngine;
 
 public class Pistol : MonoBehaviour, IWeapon
 {
-    private int _damage = 50;
+    private float _damage = 20f;
     private float _range = 20f;
-    public float _fireRate = 1; // 1 per 1sec 60shots per 1 minute
     private int _magazineSize = 15;
     private int _ammoInMagazine;
     private int _ammoInInventory = 45;
-    public Camera PlayerCamera;
+    private Camera PlayerCamera;
     private RaycastHit _hit;
+    private float _headDamageRate = 2f;
 
     public AudioSource AudioSource;
     public AudioClip ShootAudio;
@@ -40,8 +38,12 @@ public class Pistol : MonoBehaviour, IWeapon
         _ammoInMagazine--;
         if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out _hit, _range))
         {
-            if (_hit.rigidbody != null)
-                _hit.rigidbody.AddForce(-_hit.normal * _damage);
+            IEnemy enemy = _hit.transform.GetComponentInParent<IEnemy>();
+            Debug.Log($"enemy is <color=yellow> {enemy} </color> ->   Hit to <color=yellow> {_hit.collider.name} </color>");
+            if( enemy != null && _hit.collider.name == "HeadCollider")
+            enemy.TakeDamage(_damage * _headDamageRate);
+            if (enemy != null && _hit.collider.name != "HeadCollider")
+                enemy.TakeDamage(_damage);
         }
     }
 
