@@ -14,7 +14,7 @@ public class PlayerRunState : IBaseState
     }
     public void Enter(IBaseState fromState)
     {
-        CrosshairDynamic.Singleton.CrosshairSetup(_crosshairSize);
+        //CrosshairDynamic.Singleton.CrosshairSetup(_crosshairSize);
         player.CurrentSpeed = _runSpeed;
     }
 

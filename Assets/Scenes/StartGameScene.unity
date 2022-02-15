@@ -159,7 +159,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.06707013, g: 0.11211867, b: 0.2264151, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MenuWindows: 0000000001000000
-  LevelWindows: 02000000
+  LevelWindows: 0200000003000000
 --- !u!4 &845277909
 Transform:
   m_ObjectHideFlags: 0
@@ -385,11 +385,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -489,6 +489,10 @@ MonoBehaviour:
     Prefab: {fileID: 5962718331427048840, guid: 25eaf9caccbe5cd4db819e8080dc3c86, type: 3}
   - Type: 2
     Prefab: {fileID: 1617178445559668689, guid: ef134f47b5aa55548bbb2bba3eee8f8f, type: 3}
+  - Type: 3
+    Prefab: {fileID: 2070630118913126128, guid: 6d654c938d03f4e449371160245a3bb4, type: 3}
+  - Type: 4
+    Prefab: {fileID: 1314226659048713653, guid: db52e7ddc64b7e148a82425e930d662c, type: 3}
 --- !u!4 &1754727425
 Transform:
   m_ObjectHideFlags: 0

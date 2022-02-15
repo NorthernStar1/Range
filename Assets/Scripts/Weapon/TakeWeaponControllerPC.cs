@@ -4,10 +4,6 @@ using Weapon;
 public class TakeWeaponControllerPC : MonoBehaviour
 {
     public WeaponsController WeaponsController;
-    void Start()
-    {
-        WeaponsController.SwitchWeapon(0);
-    }
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Alpha1))

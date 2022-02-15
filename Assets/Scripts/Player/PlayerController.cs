@@ -10,9 +10,9 @@ public class PlayerController : MonoBehaviour, IStateSwitcher
     public bool IsDebugingStates;
     [Header("Movement")]
     [SerializeField] private float _gravity = 9f;
-    public Vector3 MoveDirection { get; set; }
-    public float CurrentSpeed = 1f;
-
+    public Vector3 MoveDirection { get; private set; }
+    public Vector3 JumpVelocity { get; set; }
+    public float CurrentSpeed;
     public CharacterController CharacterController;
    
 
@@ -20,17 +20,14 @@ public class PlayerController : MonoBehaviour, IStateSwitcher
     [SerializeField] private Camera _playerCamera;
     [SerializeField] private GameObject _player;
     [SerializeField] private float _sensivity = 30f;
-    private Vector2 _rotationVelocity;
     private float _cameraUpLimit = 90f;
     private float _cameraDownLimit = -45f;
 
 
-    public Vector3 JumpVelocity { get; set; }
-    public CrosshairDynamic Crosshair;
     public IBaseState CurrentState { get; set; }
     public List<IBaseState> States { get; set; }
 
-    public Camera Camera => _playerCamera;
+    //public Camera Camera => _playerCamera;
 
     public static PlayerController Singleton;
 
@@ -62,16 +59,17 @@ public class PlayerController : MonoBehaviour, IStateSwitcher
     }
     public void Rotate()
     {
-        _rotationVelocity.x += Input.GetAxis("Mouse X") * _sensivity * Time.deltaTime;
-        _rotationVelocity.y += Input.GetAxis("Mouse Y") * _sensivity * Time.deltaTime;
+        Vector2 rotationVelocity = Vector2.zero;
+        rotationVelocity.x += Input.GetAxis("Mouse X") * _sensivity * Time.deltaTime;
+        rotationVelocity.y += Input.GetAxis("Mouse Y") * _sensivity * Time.deltaTime;
 
-        if (_rotationVelocity.y > _cameraUpLimit)
-            _rotationVelocity.y = _cameraUpLimit;
-        if (_rotationVelocity.y < _cameraDownLimit)
-            _rotationVelocity.y = _cameraDownLimit;
+        if (rotationVelocity.y > _cameraUpLimit)
+            rotationVelocity.y = _cameraUpLimit;
+        if (rotationVelocity.y < _cameraDownLimit)
+            rotationVelocity.y = _cameraDownLimit;
 
-        _playerCamera.transform.localRotation = Quaternion.Euler(-_rotationVelocity.y, 0f, 0f);
-        _player.transform.localRotation = Quaternion.Euler(0f, _rotationVelocity.x, 0f);
+        _playerCamera.transform.localRotation = Quaternion.Euler(-rotationVelocity.y, 0f, 0f);
+        _player.transform.localRotation = Quaternion.Euler(0f, rotationVelocity.x, 0f);
     }
     public void SwitchState<State>() where State : IBaseState
     {
@@ -117,7 +115,7 @@ public class PlayerController : MonoBehaviour, IStateSwitcher
         CharacterController = GetComponent<CharacterController>();
         
 
-        _playerCamera.transform.localRotation = Quaternion.identity;
+        //_playerCamera.transform.localRotation = Quaternion.identity;
         _player.transform.localRotation = Quaternion.identity;
 
 
@@ -133,8 +131,6 @@ public class PlayerController : MonoBehaviour, IStateSwitcher
         };
 
         SwitchState<PlayerIdleState>();
-
-
     }
 
 }

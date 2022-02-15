@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
 using UIManager;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
 namespace Game
 {
     public class GameManager : MonoBehaviour
@@ -13,20 +10,25 @@ namespace Game
 
         public static GameManager Singleton;
 
-        public void LoadLevel(int index)
+        public  async void LoadLevel(int index)
         {
             var ui = GameUI.Singleton;
             MenuWindows.ForEach(x => ui.Unload(x));
             LevelWindows.ForEach(x => ui.Load(x));
-            SceneManager.LoadScene(index);
-            //await ui.Show(UIWindowType.MainMenu);
+            await LevelLoaderWindow.instance.Show();
+            LevelLoaderWindow.SwitchToScene(index);
         }
         public async void LoadMenu(bool isFirsStart = false)
         {
             var ui = GameUI.Singleton;
             LevelWindows.ForEach(x => ui.Unload(x));
             MenuWindows.ForEach(x => ui.Load(x));
-            if(isFirsStart == false) SceneManager.LoadScene(1);
+            ui.Load(UIWindowType.LevelLoaderWindow);           
+            if (isFirsStart == false)
+            {
+                await LevelLoaderWindow.instance.Show();
+                LevelLoaderWindow.SwitchToScene(1);
+            }
             await ui.Show(UIWindowType.MainMenu);
         }
 

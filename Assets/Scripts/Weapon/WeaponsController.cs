@@ -16,6 +16,7 @@ namespace Weapon
         private void Start()
         {
             Initialize();
+            SwitchWeapon(0);
         }
       
         public void Initialize()
@@ -30,15 +31,13 @@ namespace Weapon
                 weapon.Remove();
                 WeaponsInstances.Add(weapon);
             }
-
-                
-
+            CurrentWeapon = WeaponsInstances[0];
         }
         public void SwitchWeapon(int index)
         {
             CurrentWeapon?.Remove();
             CurrentWeapon = WeaponsInstances[index];
-            CurrentWeapon.Take();
+            CurrentWeapon?.Take();
         }
     }
 

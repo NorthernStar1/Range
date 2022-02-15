@@ -24,8 +24,7 @@ public class Pistol : MonoBehaviour, IWeapon
     public void Initialize()
     {
         _ammoInMagazine = _magazineSize;
-        Remove();
-        PlayerCamera = PlayerController.Singleton.Camera;
+        //PlayerCamera = PlayerController.Singleton.Camera;
 
     }
     public void Shot()

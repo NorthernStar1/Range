@@ -1616,7 +1616,6 @@ MonoBehaviour:
   _playerCamera: {fileID: 4998269115151119763}
   _player: {fileID: 4998269115625462438}
   _sensivity: 500
-  Crosshair: {fileID: 0}
 --- !u!114 &4998269115625462435
 MonoBehaviour:
   m_ObjectHideFlags: 0
